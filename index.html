@@ -1,0 +1,1714 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,viewport-fit=cover"
+        />
+        <style>
+            :root {
+                color-scheme: light;
+                box-sizing: border-box;
+                padding-top: env(safe-area-inset-top, 0px);
+                padding-bottom: env(safe-area-inset-bottom, 0px);
+            }
+            html {
+                scroll-padding-top: env(safe-area-inset-top, 0px);
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                font:
+                    14px -apple-system,
+                    BlinkMacSystemFont,
+                    sans-serif;
+                background: #fff;
+                color: #000;
+            }
+            img {
+                max-width: 100%;
+            }
+            [hidden]:not([hidden="until-found" i]) {
+                display: none !important;
+            }
+        </style>
+    </head>
+    <body>
+        <title>チャンクアンタイ 職務経歴書</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+        />
+        <style>
+            /* Layout: ヘッダー固定 / ヒーロー(氏名 + ウェハ搬送ロボットの動く図) / 縦タイムラインの職務経歴 / 資格カード / 自己PR */
+            :root {
+                --bg: #f2f5f9;
+                --surface: #ffffff;
+                --ink: #0d1b2e;
+                --muted: #50627a;
+                --line: #d5dde8;
+                --accent: #00c2a8;
+                --accent-text: #007565;
+                --hi: #ffc247;
+                --chip: #e6edf6;
+                --steel: #8fa2ba;
+                --wafer: #cbd8e8;
+                --f-display:
+                    "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic",
+                    "Meiryo", sans-serif;
+                --f-body:
+                    "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "Meiryo",
+                    sans-serif;
+                --f-mono:
+                    "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root:not([data-theme="light"]) {
+                    --bg: #0a1424;
+                    --surface: #111f36;
+                    --ink: #eaf1fa;
+                    --muted: #9db0c8;
+                    --line: #22344f;
+                    --accent: #19e0c2;
+                    --accent-text: #3de0c8;
+                    --hi: #ffc247;
+                    --chip: #172a45;
+                    --steel: #5c7391;
+                    --wafer: #3a5273;
+                    color-scheme: dark;
+                }
+            }
+            :root[data-theme="dark"] {
+                --bg: #0a1424;
+                --surface: #111f36;
+                --ink: #eaf1fa;
+                --muted: #9db0c8;
+                --line: #22344f;
+                --accent: #19e0c2;
+                --accent-text: #3de0c8;
+                --hi: #ffc247;
+                --chip: #172a45;
+                --steel: #5c7391;
+                --wafer: #3a5273;
+                color-scheme: dark;
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+                scroll-padding-top: 84px;
+            }
+            body {
+                background: var(--bg);
+                color: var(--ink);
+                font-family: var(--f-body);
+                font-size: 16px;
+                line-height: 1.9;
+                padding-inline: 20px;
+                padding-block: 0;
+                line-break: strict;
+                word-break: auto-phrase;
+                overflow-wrap: anywhere;
+            }
+            .wrap {
+                max-width: 1080px;
+                margin-inline: auto;
+            }
+            h1,
+            h2,
+            h3 {
+                font-family: var(--f-display);
+                margin: 0;
+                line-height: 1.25;
+                text-wrap: balance;
+            }
+            p {
+                margin: 0 0 1em;
+                text-wrap: pretty;
+            }
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+            :focus-visible {
+                outline: 3px solid var(--accent-text);
+                outline-offset: 3px;
+                border-radius: 6px;
+            }
+            .mono {
+                font-family: var(--f-mono);
+            }
+
+            /* progress + header */
+            #prog {
+                position: fixed;
+                left: 0;
+                right: 0;
+                top: 0;
+                height: 3px;
+                background: var(--accent);
+                transform-origin: 0 50%;
+                transform: scaleX(0);
+                z-index: 30;
+            }
+            header.top {
+                position: sticky;
+                top: env(safe-area-inset-top, 0px);
+                z-index: 20;
+                margin-inline: -20px;
+                padding-inline: 20px;
+                background: color-mix(in srgb, var(--bg) 88%, transparent);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                border-bottom: 1px solid var(--line);
+            }
+            header.top .in {
+                max-width: 1080px;
+                margin-inline: auto;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                padding-block: 10px;
+                flex-wrap: wrap;
+            }
+            .brand {
+                font: 700 1rem var(--f-display);
+                letter-spacing: 0.04em;
+                text-decoration: none;
+            }
+            .brand i {
+                font-style: normal;
+                color: var(--accent-text);
+            }
+            nav {
+                display: flex;
+                gap: 4px;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            nav a {
+                text-decoration: none;
+                font-size: 0.9rem;
+                font-weight: 500;
+                padding: 4px 12px;
+                border-radius: 99px;
+                color: var(--muted);
+                transition:
+                    background 0.2s,
+                    color 0.2s;
+            }
+            nav a:hover {
+                color: var(--ink);
+            }
+            nav a.on {
+                background: var(--ink);
+                color: var(--bg);
+            }
+            .tbtn {
+                border: 1.5px solid var(--line);
+                background: var(--surface);
+                color: var(--ink);
+                border-radius: 99px;
+                padding: 4px 14px;
+                font: 500 0.85rem var(--f-body);
+                cursor: pointer;
+                margin-left: 6px;
+            }
+            .tbtn:hover {
+                border-color: var(--ink);
+            }
+
+            /* hero */
+            .hero {
+                position: relative;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 36px;
+                align-items: center;
+                padding-block: 56px 72px;
+            }
+            .hero > * {
+                min-width: 0;
+                position: relative;
+            }
+            .hero::before {
+                content: "";
+                position: absolute;
+                inset: 0 -20px;
+                pointer-events: none;
+                background: radial-gradient(
+                    520px circle at var(--mx, 72%) var(--my, 30%),
+                    color-mix(in srgb, var(--accent) 22%, transparent),
+                    transparent 65%
+                );
+            }
+            .idrow {
+                display: flex;
+                align-items: center;
+                gap: 18px;
+                margin-bottom: 22px;
+                flex-wrap: wrap;
+            }
+            .avatar {
+                display: block;
+                width: 112px;
+                height: 112px;
+                max-width: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid var(--ink);
+                background: var(--surface);
+                box-shadow: 5px 5px 0 var(--accent);
+                transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+            }
+            .avatar:hover {
+                transform: rotate(-6deg) scale(1.05);
+            }
+            .eyebrow {
+                font: 600 0.78rem var(--f-mono);
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                color: var(--accent-text);
+                margin-bottom: 12px;
+            }
+            h1 {
+                font-size: clamp(2.4rem, 8vw, 4.6rem);
+                font-weight: 900;
+                letter-spacing: 0.02em;
+                line-height: 1.1;
+                margin-bottom: 14px;
+            }
+            h1 .u {
+                background: linear-gradient(transparent 68%, var(--hi) 68%);
+                padding-inline: 0.1em;
+                margin-inline: -0.1em;
+            }
+            .date {
+                display: inline-block;
+                font: 400 0.8rem var(--f-mono);
+                color: var(--muted);
+                border: 1px solid var(--line);
+                background: var(--surface);
+                padding: 3px 12px;
+                border-radius: 99px;
+                margin-bottom: 20px;
+            }
+            .role {
+                font: 700 clamp(1rem, 2.6vw, 1.25rem) var(--f-display);
+                min-height: 2.2em;
+                color: var(--accent-text);
+            }
+            .caret {
+                display: inline-block;
+                width: 2px;
+                height: 1.1em;
+                background: var(--accent-text);
+                vertical-align: -0.2em;
+                margin-left: 3px;
+                animation: blink 1s steps(1) infinite;
+            }
+            @keyframes blink {
+                50% {
+                    opacity: 0;
+                }
+            }
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 10px;
+                margin-top: 22px;
+            }
+            .stats > * {
+                min-width: 0;
+            }
+            .st {
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                padding: 12px 12px 10px;
+            }
+            .num {
+                font: 900 1.9rem/1.1 var(--f-display);
+                font-variant-numeric: tabular-nums;
+                white-space: nowrap;
+            }
+            .num em {
+                font: 700 0.8rem var(--f-body);
+                font-style: normal;
+                color: var(--muted);
+                margin-left: 2px;
+            }
+            .st span.l {
+                display: block;
+                font-size: 0.72rem;
+                line-height: 1.4;
+                color: var(--muted);
+                margin-top: 4px;
+            }
+
+            /* robot stage */
+            .stage {
+                background: var(--surface);
+                border: 1.5px solid var(--ink);
+                border-radius: 22px;
+                padding: 14px 14px 12px;
+                box-shadow: 8px 8px 0 var(--accent);
+                background-image:
+                    linear-gradient(var(--line) 1px, transparent 1px),
+                    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+                background-size: 28px 28px;
+                background-position: -1px -1px;
+                position: relative;
+            }
+            .stage svg {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+            .stage .bar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+                margin-top: 6px;
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: 10px;
+                padding: 6px 10px;
+                font: 400 0.78rem var(--f-mono);
+            }
+            .stage .bar #status {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                min-width: 0;
+            }
+            .pbtn {
+                flex: none;
+                border: 1px solid var(--ink);
+                background: var(--ink);
+                color: var(--bg);
+                border-radius: 8px;
+                font: 600 0.75rem var(--f-mono);
+                padding: 3px 10px;
+                cursor: pointer;
+            }
+            .reach {
+                fill: none;
+                stroke: var(--line);
+                stroke-width: 1.5;
+                stroke-dasharray: 3 5;
+            }
+            .stn {
+                fill: var(--surface);
+                stroke: var(--steel);
+                stroke-width: 2;
+                stroke-dasharray: 4 4;
+            }
+            .wf {
+                fill: var(--wafer);
+                stroke: var(--accent-text);
+                stroke-width: 2;
+            }
+            .notch {
+                stroke: var(--accent-text);
+                stroke-width: 2;
+                stroke-linecap: round;
+            }
+            .lbl {
+                font: 600 11px var(--f-mono);
+                fill: var(--muted);
+                text-anchor: middle;
+            }
+            .arm {
+                stroke: var(--ink);
+                stroke-width: 12;
+                stroke-linecap: round;
+                fill: none;
+            }
+            .armhi {
+                stroke: var(--steel);
+                stroke-width: 2;
+                stroke-linecap: round;
+                fill: none;
+            }
+            .jt {
+                fill: var(--accent);
+                stroke: var(--ink);
+                stroke-width: 3;
+            }
+            .basec {
+                fill: var(--ink);
+            }
+
+            /* sections */
+            section {
+                padding-block: 64px;
+            }
+            .sec-h {
+                display: flex;
+                align-items: baseline;
+                gap: 14px;
+                flex-wrap: wrap;
+                margin-bottom: 28px;
+            }
+            .sec-h h2 {
+                font-size: clamp(1.6rem, 4vw, 2.3rem);
+                font-weight: 900;
+                letter-spacing: 0.03em;
+            }
+            .sec-h h2::before {
+                content: "■";
+                color: var(--accent);
+                margin-right: 0.35em;
+                font-size: 0.7em;
+                vertical-align: 0.12em;
+            }
+            .sec-h span {
+                font: 600 0.78rem var(--f-mono);
+                letter-spacing: 0.14em;
+                text-transform: uppercase;
+                color: var(--muted);
+            }
+
+            .sum {
+                display: grid;
+                grid-template-columns: 1.25fr 0.75fr;
+                gap: 36px;
+            }
+            .sum > * {
+                min-width: 0;
+            }
+            .goal {
+                align-self: start;
+                background: var(--ink);
+                color: var(--bg);
+                border-radius: 20px;
+                padding: 26px 26px 14px;
+                position: relative;
+            }
+            .goal b {
+                display: block;
+                font: 600 0.75rem var(--f-mono);
+                letter-spacing: 0.12em;
+                color: var(--accent);
+                margin-bottom: 10px;
+                text-transform: uppercase;
+            }
+            .goal p {
+                font-weight: 500;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root:not([data-theme="light"]) .goal {
+                    background: var(--surface);
+                    border: 1.5px solid var(--accent);
+                    color: var(--ink);
+                }
+            }
+            :root[data-theme="dark"] .goal {
+                background: var(--surface);
+                border: 1.5px solid var(--accent);
+                color: var(--ink);
+            }
+
+            .skl {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            .skl > * {
+                min-width: 0;
+            }
+            .sk {
+                display: flex;
+                gap: 14px;
+                align-items: flex-start;
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: 14px;
+                padding: 14px 16px;
+                line-height: 1.7;
+                transition:
+                    transform 0.2s,
+                    border-color 0.2s;
+            }
+            .sk:hover {
+                transform: translateY(-3px);
+                border-color: var(--accent-text);
+            }
+            .sk .t {
+                flex: none;
+                min-width: 64px;
+                text-align: center;
+                font: 600 0.68rem var(--f-mono);
+                letter-spacing: 0.08em;
+                background: var(--chip);
+                color: var(--accent-text);
+                border-radius: 8px;
+                padding: 3px 6px;
+                margin-top: 2px;
+            }
+
+            /* timeline */
+            .tl {
+                position: relative;
+                padding-left: 34px;
+            }
+            .tl::before,
+            .tl .fill {
+                content: "";
+                position: absolute;
+                left: 8px;
+                top: 8px;
+                bottom: 8px;
+                width: 3px;
+                border-radius: 3px;
+                background: var(--line);
+            }
+            .tl .fill {
+                background: var(--accent);
+                bottom: auto;
+                height: calc((100% - 16px) * var(--p, 1));
+                transition: height 0.15s linear;
+            }
+            .job {
+                position: relative;
+                background: var(--surface);
+                border: 1.5px solid var(--ink);
+                border-radius: 20px;
+                padding: 24px clamp(18px, 3vw, 30px);
+                margin-bottom: 28px;
+            }
+            .job:last-child {
+                margin-bottom: 0;
+            }
+            .job::before {
+                content: "";
+                position: absolute;
+                left: -34px;
+                top: 30px;
+                width: 19px;
+                height: 19px;
+                border-radius: 50%;
+                background: var(--bg);
+                border: 4px solid var(--accent-text);
+            }
+            .job .when {
+                font: 600 0.85rem var(--f-mono);
+                color: var(--accent-text);
+                letter-spacing: 0.04em;
+            }
+            .job h3 {
+                font-size: clamp(1.15rem, 3vw, 1.5rem);
+                margin: 4px 0 2px;
+            }
+            .job .kind {
+                color: var(--muted);
+                font-size: 0.9rem;
+                margin-bottom: 6px;
+            }
+            .proj {
+                border-top: 1px dashed var(--line);
+                margin-top: 18px;
+                padding-top: 18px;
+            }
+            .proj h4 {
+                margin: 0 0 6px;
+                font: 700 1.02rem var(--f-display);
+            }
+            .meta {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px 12px;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            .pill {
+                font: 600 0.75rem var(--f-mono);
+                background: var(--chip);
+                border-radius: 99px;
+                padding: 2px 12px;
+                color: var(--ink);
+            }
+            .phase {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                margin-bottom: 10px;
+            }
+            .phase span {
+                font-size: 0.78rem;
+                font-weight: 500;
+                border: 1px solid var(--accent-text);
+                color: var(--accent-text);
+                border-radius: 6px;
+                padding: 0 9px;
+            }
+            .job ul.d li {
+                position: relative;
+                padding-left: 1.2em;
+                margin-bottom: 0.35em;
+            }
+            .job ul.d li::before {
+                content: "";
+                position: absolute;
+                left: 0.1em;
+                top: 0.82em;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--accent);
+            }
+            .lab {
+                font: 700 0.78rem var(--f-mono);
+                letter-spacing: 0.08em;
+                color: var(--muted);
+                margin: 10px 0 4px;
+            }
+
+            /* qualifications */
+            .qs {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+                gap: 14px;
+            }
+            .qs > * {
+                min-width: 0;
+            }
+            .q {
+                background: var(--surface);
+                border: 1px solid var(--line);
+                border-radius: 16px;
+                padding: 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                transition:
+                    transform 0.2s,
+                    box-shadow 0.2s;
+            }
+            .q:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 8px 0 var(--accent);
+            }
+            .q.hl {
+                border: 2px solid var(--accent-text);
+            }
+            .q .d {
+                font: 400 0.8rem var(--f-mono);
+                color: var(--muted);
+            }
+            .q b {
+                font: 700 1.08rem/1.4 var(--f-display);
+            }
+            .q .r {
+                align-self: flex-start;
+                margin-top: auto;
+                font: 600 0.72rem var(--f-mono);
+                background: var(--accent);
+                color: #0d1b2e;
+                border-radius: 6px;
+                padding: 1px 10px;
+            }
+
+            /* PR */
+            .pr {
+                display: grid;
+                grid-template-columns: 0.9fr 1.1fr;
+                gap: 40px;
+            }
+            .pr > * {
+                min-width: 0;
+            }
+            .pull {
+                font: 900 clamp(1.4rem, 3.2vw, 2.1rem)/1.45 var(--f-display);
+                letter-spacing: 0.02em;
+                align-self: start;
+                position: sticky;
+                top: 96px;
+            }
+            .pull mark {
+                background: linear-gradient(transparent 62%, var(--hi) 62%);
+                color: inherit;
+                padding-inline: 0.1em;
+            }
+            .end {
+                text-align: right;
+                margin-top: 8px;
+                font-weight: 700;
+            }
+            .ct {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+                gap: 18px;
+            }
+            .ct > * {
+                min-width: 0;
+            }
+            .cl {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+                flex-wrap: wrap;
+                background: var(--surface);
+                border: 1.5px solid var(--ink);
+                border-radius: 18px;
+                padding: 18px 20px;
+                box-shadow: 6px 6px 0 var(--accent);
+            }
+            .cl .k {
+                flex: none;
+                font: 600 0.7rem var(--f-mono);
+                letter-spacing: 0.1em;
+                background: var(--chip);
+                color: var(--accent-text);
+                border-radius: 6px;
+                padding: 2px 9px;
+            }
+            .cl .v {
+                flex: 1;
+                min-width: 0;
+                font: 600 clamp(1rem, 2.6vw, 1.2rem) var(--f-mono);
+                overflow-wrap: anywhere;
+                user-select: all;
+            }
+            .cp {
+                flex: none;
+                border: 1px solid var(--ink);
+                background: var(--ink);
+                color: var(--bg);
+                border-radius: 8px;
+                font: 600 0.78rem var(--f-body);
+                padding: 4px 12px;
+                cursor: pointer;
+            }
+            .cp:hover {
+                background: var(--accent);
+                color: #0d1b2e;
+                border-color: var(--accent);
+            }
+            .cnote {
+                font: 400 0.8rem var(--f-mono);
+                color: var(--muted);
+                margin-top: 18px;
+            }
+            footer {
+                border-top: 1px solid var(--line);
+                padding-block: 28px;
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+                flex-wrap: wrap;
+                color: var(--muted);
+                font: 400 0.8rem var(--f-mono);
+            }
+
+            /* reveal: 位置のみ動かす(文字は常に読める) */
+            .rv {
+                transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+            }
+            .rv.pre {
+                transform: translateY(22px);
+            }
+
+            @media (max-width: 860px) {
+                .hero,
+                .sum,
+                .pr {
+                    grid-template-columns: 1fr;
+                }
+                .pull {
+                    position: static;
+                }
+                .skl {
+                    grid-template-columns: 1fr;
+                }
+                section {
+                    padding-block: 48px;
+                }
+                .hero {
+                    padding-block: 36px 52px;
+                }
+            }
+            @media (max-width: 520px) {
+                .stats {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .tl {
+                    padding-left: 26px;
+                }
+                .job::before {
+                    left: -26px;
+                }
+                nav a {
+                    padding: 4px 8px;
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation: none !important;
+                    transition: none !important;
+                }
+                html {
+                    scroll-behavior: auto;
+                }
+            }
+        </style>
+
+        <div id="prog" aria-hidden="true"></div>
+
+        <main lang="ja">
+            <header class="top">
+                <div class="in">
+                    <a class="brand" href="#top">チャンクアンタイ</a>
+                    <nav aria-label="ページ内メニュー">
+                        <a href="#sum">要約</a>
+                        <a href="#skill">技術</a>
+                        <a href="#exp">職務経歴</a>
+                        <a href="#qual">資格</a>
+                        <a href="#pr">自己PR</a>
+                        <a href="#contact">連絡先</a>
+                        <button
+                            class="tbtn"
+                            id="theme"
+                            type="button"
+                            aria-label="ライトとダークを切り替える"
+                        >
+                            ライト / ダーク
+                        </button>
+                    </nav>
+                </div>
+            </header>
+
+            <div class="wrap">
+                <div class="hero" id="top">
+                    <div>
+                        <div class="idrow">
+                            <img
+                                class="avatar"
+                                src="data:image/jpeg;base64,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"
+                                width="112"
+                                height="112"
+                                alt="チャンクアンタイの顔写真"
+                            />
+                            <div>
+                                <div class="eyebrow" style="margin-bottom: 8px">
+                                    Career History
+                                </div>
+                                <span class="date" style="margin-bottom: 0"
+                                    >2026年10月06日現在</span
+                                >
+                            </div>
+                        </div>
+                        <h1><span class="u">チャンクアンタイ</span></h1>
+                        <div class="role" aria-live="off">
+                            <span id="typed"
+                                >要件・仕様の理解から、設計・開発・導入・保守まで</span
+                            ><span class="caret"></span>
+                        </div>
+                        <div class="stats">
+                            <div class="st">
+                                <div class="num">
+                                    <span class="cnt" data-to="2">2</span
+                                    ><em>年+</em>
+                                </div>
+                                <span class="l">現職でのソフトウェア開発</span>
+                            </div>
+                            <div class="st">
+                                <div class="num">
+                                    <span class="cnt" data-to="2">2</span
+                                    ><em>件</em>
+                                </div>
+                                <span class="l"
+                                    >ウェハ搬送ロボット関連プロジェクト</span
+                                >
+                            </div>
+                            <div class="st">
+                                <div class="num">
+                                    <span class="cnt" data-to="700">700</span
+                                    ><em>点</em>
+                                </div>
+                                <span class="l">TOEIC</span>
+                            </div>
+                            <div class="st">
+                                <div class="num">N2</div>
+                                <span class="l">日本語能力試験</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stage">
+                        <svg
+                            id="robot"
+                            viewBox="0 0 400 290"
+                            role="img"
+                            aria-label="ウェハ搬送ロボットが3つのステーションの間でウェハを搬送するアニメーション"
+                        >
+                            <circle class="reach" cx="200" cy="262" r="152" />
+                            <circle class="stn" cx="57.2" cy="210" r="32" />
+                            <circle class="stn" cx="200" cy="110" r="32" />
+                            <circle class="stn" cx="342.8" cy="210" r="32" />
+                            <g id="wafers">
+                                <g id="w0">
+                                    <circle class="wf" r="22" />
+                                    <line
+                                        class="notch"
+                                        x1="-4"
+                                        y1="22"
+                                        x2="4"
+                                        y2="22"
+                                    />
+                                </g>
+                                <g id="w1" style="display: none">
+                                    <circle class="wf" r="22" />
+                                    <line
+                                        class="notch"
+                                        x1="-4"
+                                        y1="22"
+                                        x2="4"
+                                        y2="22"
+                                    />
+                                </g>
+                                <g id="w2" style="display: none">
+                                    <circle class="wf" r="22" />
+                                    <line
+                                        class="notch"
+                                        x1="-4"
+                                        y1="22"
+                                        x2="4"
+                                        y2="22"
+                                    />
+                                </g>
+                            </g>
+                            <text class="lbl" x="57" y="162">ロードポート</text>
+                            <text class="lbl" x="200" y="62">アライナ</text>
+                            <text class="lbl" x="343" y="162">ステージ</text>
+                            <line
+                                class="arm"
+                                id="a1"
+                                x1="200"
+                                y1="262"
+                                x2="200"
+                                y2="200"
+                            />
+                            <line
+                                class="arm"
+                                id="a2"
+                                x1="200"
+                                y1="200"
+                                x2="200"
+                                y2="200"
+                            />
+                            <line
+                                class="armhi"
+                                id="h1"
+                                x1="200"
+                                y1="262"
+                                x2="200"
+                                y2="200"
+                            />
+                            <line
+                                class="armhi"
+                                id="h2"
+                                x1="200"
+                                y1="200"
+                                x2="200"
+                                y2="200"
+                            />
+                            <circle class="basec" cx="200" cy="262" r="22" />
+                            <circle class="jt" cx="200" cy="262" r="8" />
+                            <circle
+                                class="jt"
+                                id="elb"
+                                r="9"
+                                cx="200"
+                                cy="200"
+                            />
+                            <g id="carry" style="display: none">
+                                <circle class="wf" r="22" />
+                                <line
+                                    class="notch"
+                                    x1="-4"
+                                    y1="22"
+                                    x2="4"
+                                    y2="22"
+                                />
+                            </g>
+                        </svg>
+                        <div class="bar">
+                            <span id="status">待機中</span>
+                            <button
+                                class="pbtn"
+                                id="pp"
+                                type="button"
+                                aria-label="アニメーションを一時停止または再生"
+                            >
+                                一時停止
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <section id="sum">
+                    <div class="sec-h">
+                        <h2>職務要約</h2>
+                        <span>Summary</span>
+                    </div>
+                    <div class="sum">
+                        <div>
+                            <p class="rv">
+                                大学卒業後、ベトナムのGMO-Z.com
+                                RUNSYSTEMにてWebサイト開発に携わり、HTML/CSS、JavaScriptを使用した開発・テストを経験しました。
+                            </p>
+                            <p class="rv">
+                                その後、来日し、現在は半導体製造装置に搭載されるウェハ搬送ロボットの制御ソフトウェア開発・保守に携わっています。機械仕様書や顧客要求、既存ソースコードを確認し、仕様や処理内容を理解した上で、機能追加・変更・削除の内容検討、設計、C#による開発、GUI・制御ロジックの修正、テスト、不具合対応まで経験しています。
+                            </p>
+                            <p class="rv">
+                                また、装置立ち上げ時には顧客への仕様・操作説明や質問・要望への対応を行っており、技術的な内容を相手に分かりやすく伝える経験も積んできました。
+                            </p>
+                        </div>
+                        <aside class="goal rv">
+                            <b>Goal</b>
+                            <p>
+                                これまでのソフトウェア開発経験、仕様理解力、設計・問題解決力、顧客対応経験を活かし、今後は要件・仕様の理解から設計、開発、導入・保守まで幅広く携われるシステムエンジニアを目指しています。
+                            </p>
+                        </aside>
+                    </div>
+                </section>
+
+                <section id="skill" style="padding-top: 0">
+                    <div class="sec-h">
+                        <h2>活かせる経験・知識・技術</h2>
+                        <span>Skills</span>
+                    </div>
+                    <ul class="skl">
+                        <li class="sk rv">
+                            <span class="t">WEB</span
+                            ><span
+                                >Webサイト開発経験（HTML / CSS /
+                                JavaScript）</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">C# / .NET</span
+                            ><span
+                                >C#、.NET、XAMLを使用したソフトウェア開発経験</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">SPEC</span
+                            ><span
+                                >機械仕様書、顧客要求、既存ソースコードを確認した上での仕様・処理内容の理解</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">CHANGE</span
+                            ><span
+                                >既存システムへの機能追加・変更・削除における影響確認、変更内容の検討・設計</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">GUI</span
+                            ><span
+                                >GUI（画面）および制御ロジックの修正・機能追加</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">DEBUG</span
+                            ><span
+                                >デバッグ、動作確認、テスト、不具合の原因調査・修正</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">CLIENT</span
+                            ><span
+                                >装置立ち上げ時の顧客への仕様・操作説明、質問・要望への対応</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">LANG</span
+                            ><span
+                                >日本語・英語による技術的なコミュニケーション</span
+                            >
+                        </li>
+                        <li class="sk rv">
+                            <span class="t">SELF</span
+                            ><span
+                                >不明点を自ら調査し、必要な情報を収集しながら問題を解決する力</span
+                            >
+                        </li>
+                    </ul>
+                </section>
+
+                <section id="exp" style="padding-top: 0">
+                    <div class="sec-h">
+                        <h2>職務経歴</h2>
+                        <span>Experience</span>
+                    </div>
+                    <div class="tl" id="tl">
+                        <div class="fill" id="tlfill"></div>
+
+                        <article class="job rv">
+                            <div class="when">2021年07月 ～ 2021年12月</div>
+                            <h3>株式会社 GMO-Z.com RUNSYSTEM</h3>
+                            <div class="kind">インターンシップとして勤務</div>
+                            <div class="proj">
+                                <div class="lab">PROJECT</div>
+                                <h4>
+                                    HTML、CSS、JavaScriptを使用したランディングページの制作
+                                </h4>
+                                <div class="phase">
+                                    <span>開発</span><span>テスト</span>
+                                </div>
+                                <div class="lab">仕事内容</div>
+                                <ul class="d">
+                                    <li>
+                                        HTML、CSSを使用したWebページのレイアウト作成、JavaScriptによる簡単な機能の実装および修正、テストを担当しました。
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+
+                        <article class="job rv">
+                            <div class="when">2024年07月 ～ 現在</div>
+                            <h3>株式会社アテル（Atel）</h3>
+                            <div class="kind">正社員として勤務</div>
+
+                            <div class="proj">
+                                <div class="meta">
+                                    <span class="pill"
+                                        >2025年02月 ～ 2025年10月</span
+                                    >
+                                </div>
+                                <h4>
+                                    半導体製造装置向けウェハ搬送ロボット開発、およびマクロ・ミクロを使用したウェハ表面の検査制御ソフトウェア開発
+                                </h4>
+                                <div class="phase">
+                                    <span>要件・仕様確認</span
+                                    ><span>機能変更内容の検討・設計</span
+                                    ><span>開発</span><span>テスト</span
+                                    ><span>導入</span><span>不具合対応</span
+                                    ><span>保守</span>
+                                </div>
+                                <div class="lab">仕事内容</div>
+                                <ul class="d">
+                                    <li>
+                                        機械仕様書や顧客要求を確認し、既存ソフトウェアの仕様や処理内容を調査した上で、必要な機能追加・変更内容を検討
+                                    </li>
+                                    <li>
+                                        既存機能への影響を確認しながら、機能追加、変更、削除に関する設計およびプログラム修正
+                                    </li>
+                                    <li>
+                                        C#.NET、XAMLを使用した装置画面（GUI）の修正、機能追加、装置の搬送制御ロジックに関する既存機能の修正
+                                    </li>
+                                    <li>
+                                        設計・修正した内容について、デバッグ、動作確認、テストを実施
+                                    </li>
+                                    <li>
+                                        不具合発生時の原因調査、修正および再確認
+                                    </li>
+                                    <li>
+                                        装置立ち上げ時における顧客への仕様、動作、操作方法の説明および質問・要望への対応
+                                    </li>
+                                    <li>
+                                        海外顧客との仕様確認、技術的な問い合わせ対応
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="proj">
+                                <div class="meta">
+                                    <span class="pill"
+                                        >2025年12月 ～ 2026年08月</span
+                                    >
+                                </div>
+                                <h4>
+                                    半導体製造向けウェハ搬送ロボット（移載機）制御ソフトウェア開発
+                                </h4>
+                                <div class="phase">
+                                    <span>開発</span><span>テスト</span
+                                    ><span>導入</span><span>保守運用</span>
+                                </div>
+                                <div class="lab">仕事内容</div>
+                                <ul class="d">
+                                    <li>
+                                        既存機能への影響を確認しながら、機能追加、変更、削除に関する設計およびプログラム修正
+                                    </li>
+                                    <li>
+                                        C#.NET、XAMLを使用した装置画面（GUI）の修正、機能追加、装置の搬送制御ロジックに関する既存機能の修正
+                                    </li>
+                                    <li>
+                                        装置立会時対応、顧客への装置搬送、操作方法の説明
+                                    </li>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+
+                <section id="qual" style="padding-top: 0">
+                    <div class="sec-h">
+                        <h2>資格</h2>
+                        <span>Qualifications</span>
+                    </div>
+                    <div class="qs">
+                        <div class="q rv">
+                            <span class="d">2020年06月</span><b>TOEIC 700点</b
+                            ><span class="r">合格</span>
+                        </div>
+                        <div class="q rv">
+                            <span class="d">2021年05月</span
+                            ><b>ソフトウェア技術 証明書</b
+                            ><span class="r">証明書</span>
+                        </div>
+                        <div class="q rv">
+                            <span class="d">2023年07月</span
+                            ><b>日本語能力試験 N3 レベル</b
+                            ><span class="r">合格</span>
+                        </div>
+                        <div class="q rv hl">
+                            <span class="d">2023年12月</span
+                            ><b>日本語能力試験 N2 レベル</b
+                            ><span class="r">合格</span>
+                        </div>
+                        <div class="q rv">
+                            <span class="d">2026年08月</span
+                            ><b>普通自動車免許</b><span class="r">取得</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="pr" style="padding-top: 0">
+                    <div class="sec-h">
+                        <h2>自己PR</h2>
+                        <span>Self PR</span>
+                    </div>
+                    <div class="pr">
+                        <div class="pull rv">
+                            分からないことでも<mark>自分で調べて理解</mark>し、問題を解決しながら仕事を進められる。
+                        </div>
+                        <div>
+                            <p class="rv">
+                                私の強みは、分からないことでも自分で調べて理解し、問題を解決しながら仕事を進められることです。
+                            </p>
+                            <p class="rv">
+                                現在は、半導体製造装置に搭載されるウェハ搬送ロボットの制御ソフトウェア開発に携わっています。機械仕様書や顧客要求、既存のソースコードを確認し、処理内容を理解した上で、機能の追加・変更・削除やGUIの修正、デバッグ、不具合対応などを行っています。
+                            </p>
+                            <p class="rv">
+                                業務の中で分からない技術や処理があった場合も、仕様書や既存コードを確認したり、自分で情報を調べたりしながら理解を深め、問題の原因を考えて対応することを意識しています。
+                            </p>
+                            <p class="rv">
+                                また、装置の立ち上げ時には、顧客に対して装置の仕様や操作方法を説明し、質問や要望に対応する経験もあります。技術的な内容についても、相手に分かりやすく伝えることを意識してコミュニケーションを取ってきました。
+                            </p>
+                            <p class="rv">
+                                これまで培ってきた開発経験、仕様を理解して変更内容を検討する力、問題解決力、顧客対応力を活かし、今後は要件・仕様の理解から設計、開発、テスト、導入・保守まで幅広く携われるシステムエンジニアとして成長していきたいと考えています。
+                            </p>
+                            <div class="end">以上</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="contact" style="padding-top: 0">
+                    <div class="sec-h">
+                        <h2>連絡先</h2>
+                        <span>Contact</span>
+                    </div>
+                    <div class="ct">
+                        <div class="cl rv">
+                            <span class="k">TEL</span
+                            ><span class="v" id="phone">080-9794-3832</span
+                            ><button class="cp" type="button" data-copy="phone">
+                                コピー
+                            </button>
+                        </div>
+                        <div class="cl rv">
+                            <span class="k">EMAIL</span
+                            ><span class="v" id="mail"
+                                >thailyon33@gmail.com</span
+                            ><button class="cp" type="button" data-copy="mail">
+                                コピー
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <footer>
+                    <span>チャンクアンタイ</span>
+                    <span>2026年10月06日現在</span>
+                </footer>
+            </div>
+        </main>
+
+        <script>
+            (function () {
+                var reduce = window.matchMedia(
+                    "(prefers-reduced-motion: reduce)",
+                ).matches;
+                var root = document.documentElement;
+
+                /* テーマ切替 */
+                document
+                    .getElementById("theme")
+                    .addEventListener("click", function () {
+                        var dark = root.dataset.theme
+                            ? root.dataset.theme === "dark"
+                            : window.matchMedia("(prefers-color-scheme: dark)")
+                                  .matches;
+                        root.dataset.theme = dark ? "light" : "dark";
+                    });
+
+                /* 連絡先のコピー */
+                document.querySelectorAll(".cp").forEach(function (b) {
+                    b.addEventListener("click", function () {
+                        var el = document.getElementById(b.dataset.copy);
+                        function ok() {
+                            b.textContent = "コピーしました";
+                            setTimeout(function () {
+                                b.textContent = "コピー";
+                            }, 1600);
+                        }
+                        function sel() {
+                            var r = document.createRange();
+                            r.selectNodeContents(el);
+                            var s = getSelection();
+                            s.removeAllRanges();
+                            s.addRange(r);
+                        }
+                        try {
+                            navigator.clipboard
+                                .writeText(el.textContent)
+                                .then(ok, sel);
+                        } catch (e) {
+                            sel();
+                        }
+                    });
+                });
+
+                /* 肩書きのタイピング切替 */
+                var lines = [
+                    "要件・仕様の理解から、設計・開発・導入・保守まで",
+                    "C# / .NET / XAML で装置のGUIと制御ロジックを開発",
+                    "日本語 N2 ・ 英語 TOEIC 700 で顧客と技術対話",
+                    "システムエンジニアとして、さらに広い領域へ",
+                ];
+                var tEl = document.getElementById("typed");
+                if (!reduce) {
+                    var li = 0,
+                        ci = 0,
+                        del = false;
+                    (function tick() {
+                        var w = lines[li];
+                        tEl.textContent = w.slice(0, ci);
+                        if (!del && ci < w.length) {
+                            ci++;
+                            setTimeout(tick, 55);
+                        } else if (!del) {
+                            del = true;
+                            setTimeout(tick, 2200);
+                        } else if (ci > 0) {
+                            ci--;
+                            setTimeout(tick, 22);
+                        } else {
+                            del = false;
+                            li = (li + 1) % lines.length;
+                            setTimeout(tick, 350);
+                        }
+                    })();
+                }
+
+                /* 数字のカウントアップ */
+                function count(el) {
+                    var to = +el.dataset.to,
+                        t0 = null,
+                        dur = 1400;
+                    function s(ts) {
+                        if (!t0) t0 = ts;
+                        var p = Math.min((ts - t0) / dur, 1),
+                            e = 1 - Math.pow(1 - p, 3);
+                        el.textContent = Math.round(to * e);
+                        if (p < 1) requestAnimationFrame(s);
+                    }
+                    el.textContent = "0";
+                    requestAnimationFrame(s);
+                }
+                var cnts = document.querySelectorAll(".cnt");
+                if (!reduce && "IntersectionObserver" in window) {
+                    var cio = new IntersectionObserver(
+                        function (es) {
+                            es.forEach(function (e) {
+                                if (e.isIntersecting) {
+                                    count(e.target);
+                                    cio.unobserve(e.target);
+                                }
+                            });
+                        },
+                        { threshold: 0.6 },
+                    );
+                    cnts.forEach(function (c) {
+                        cio.observe(c);
+                    });
+                }
+
+                /* ヒーローのスポットライト */
+                var hero = document.querySelector(".hero");
+                hero.addEventListener("pointermove", function (e) {
+                    var r = hero.getBoundingClientRect();
+                    hero.style.setProperty("--mx", e.clientX - r.left + "px");
+                    hero.style.setProperty("--my", e.clientY - r.top + "px");
+                });
+
+                /* スクロールで要素を持ち上げて表示(位置のみ) */
+                var rvs = document.querySelectorAll(".rv");
+                if (!reduce && "IntersectionObserver" in window) {
+                    var rio = new IntersectionObserver(
+                        function (es) {
+                            es.forEach(function (e) {
+                                if (e.isIntersecting) {
+                                    e.target.classList.remove("pre");
+                                    rio.unobserve(e.target);
+                                }
+                            });
+                        },
+                        { rootMargin: "0px 0px -8% 0px" },
+                    );
+                    rvs.forEach(function (el, i) {
+                        if (
+                            el.getBoundingClientRect().top > window.innerHeight
+                        ) {
+                            var sib = Array.prototype.indexOf.call(
+                                el.parentNode.children,
+                                el,
+                            );
+                            el.style.transitionDelay =
+                                Math.min(sib, 6) * 60 + "ms";
+                            el.classList.add("pre");
+                            rio.observe(el);
+                        }
+                    });
+                }
+
+                /* 進捗バー・タイムライン・現在地メニュー */
+                var prog = document.getElementById("prog"),
+                    tl = document.getElementById("tl"),
+                    ticking = false;
+                function onScroll() {
+                    var h =
+                        document.documentElement.scrollHeight -
+                        window.innerHeight;
+                    prog.style.transform =
+                        "scaleX(" +
+                        (h > 0 ? Math.min(window.scrollY / h, 1) : 0) +
+                        ")";
+                    var r = tl.getBoundingClientRect();
+                    var p = (window.innerHeight * 0.6 - r.top) / r.height;
+                    tl.style.setProperty("--p", Math.max(0, Math.min(1, p)));
+                    ticking = false;
+                }
+                window.addEventListener(
+                    "scroll",
+                    function () {
+                        if (!ticking) {
+                            ticking = true;
+                            requestAnimationFrame(onScroll);
+                        }
+                    },
+                    { passive: true },
+                );
+                window.addEventListener("resize", onScroll);
+                onScroll();
+
+                var links = {};
+                document.querySelectorAll("nav a").forEach(function (a) {
+                    links[a.getAttribute("href").slice(1)] = a;
+                });
+                if ("IntersectionObserver" in window) {
+                    var nio = new IntersectionObserver(
+                        function (es) {
+                            es.forEach(function (e) {
+                                if (e.isIntersecting) {
+                                    Object.keys(links).forEach(function (k) {
+                                        links[k].classList.toggle(
+                                            "on",
+                                            k === e.target.id,
+                                        );
+                                    });
+                                }
+                            });
+                        },
+                        { rootMargin: "-35% 0px -60% 0px" },
+                    );
+                    Object.keys(links).forEach(function (k) {
+                        var s = document.getElementById(k);
+                        if (s) nio.observe(s);
+                    });
+                }
+
+                /* ウェハ搬送ロボット */
+                var B = { x: 200, y: 262 },
+                    L = 88,
+                    R = 152,
+                    RR = 64,
+                    ANG = [200, 270, 340];
+                var NAMES = ["ロードポート", "アライナ", "プロセスチャンバ"];
+                var $ = function (id) {
+                    return document.getElementById(id);
+                };
+                var a1 = $("a1"),
+                    a2 = $("a2"),
+                    h1 = $("h1"),
+                    h2 = $("h2"),
+                    elb = $("elb"),
+                    carry = $("carry"),
+                    status = $("status"),
+                    pp = $("pp");
+                var wafers = [true, false, false],
+                    carried = false;
+                function P(th, r) {
+                    var t = (th * Math.PI) / 180;
+                    return {
+                        x: B.x + r * Math.cos(t),
+                        y: B.y + r * Math.sin(t),
+                    };
+                }
+                function draw(th, r) {
+                    var al = Math.acos(Math.min(1, r / (2 * L))),
+                        t = (th * Math.PI) / 180;
+                    var e = {
+                            x: B.x + L * Math.cos(t + al),
+                            y: B.y + L * Math.sin(t + al),
+                        },
+                        p = P(th, r);
+                    [
+                        [a1, B, e],
+                        [h1, B, e],
+                        [a2, e, p],
+                        [h2, e, p],
+                    ].forEach(function (s) {
+                        s[0].setAttribute("x1", s[1].x);
+                        s[0].setAttribute("y1", s[1].y);
+                        s[0].setAttribute("x2", s[2].x);
+                        s[0].setAttribute("y2", s[2].y);
+                    });
+                    elb.setAttribute("cx", e.x);
+                    elb.setAttribute("cy", e.y);
+                    carry.setAttribute(
+                        "transform",
+                        "translate(" + p.x + " " + p.y + ")",
+                    );
+                    carry.style.display = carried ? "" : "none";
+                }
+                function showWafers() {
+                    for (var i = 0; i < 3; i++) {
+                        var p = P(ANG[i], R),
+                            g = $("w" + i);
+                        g.setAttribute(
+                            "transform",
+                            "translate(" + p.x + " " + p.y + ")",
+                        );
+                        g.style.display = wafers[i] ? "" : "none";
+                    }
+                }
+                function plan(i) {
+                    var j = (i + 1) % 3;
+                    return [
+                        { th: ANG[i], r: RR, d: 900, m: "移動  → " + NAMES[i] },
+                        { th: ANG[i], r: R, d: 550 },
+                        {
+                            act: "pick",
+                            i: i,
+                            d: 260,
+                            m: "ウェハ取得  " + NAMES[i],
+                        },
+                        {
+                            th: ANG[i],
+                            r: RR,
+                            d: 550,
+                            m: "搬送中  " + NAMES[i] + " → " + NAMES[j],
+                        },
+                        { th: ANG[j], r: RR, d: 900 },
+                        { th: ANG[j], r: R, d: 550 },
+                        {
+                            act: "place",
+                            i: j,
+                            d: 260,
+                            m: "載置完了  " + NAMES[j],
+                        },
+                        { th: ANG[j], r: RR, d: 550 },
+                    ];
+                }
+                var st = { th: 270, r: RR },
+                    src = 0,
+                    queue = [],
+                    step = null,
+                    el = 0,
+                    from = null,
+                    paused = reduce,
+                    last = 0;
+                function ease(t) {
+                    return t < 0.5
+                        ? 4 * t * t * t
+                        : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+                function next() {
+                    if (!queue.length) {
+                        queue = plan(src);
+                        src = (src + 1) % 3;
+                    }
+                    step = queue.shift();
+                    el = 0;
+                    from = { th: st.th, r: st.r };
+                    if (step.m) status.textContent = step.m;
+                    if (step.act === "pick") {
+                        wafers[step.i] = false;
+                        carried = true;
+                        showWafers();
+                    }
+                    if (step.act === "place") {
+                        wafers[step.i] = true;
+                        carried = false;
+                        showWafers();
+                    }
+                }
+                function frame(ts) {
+                    var dt = Math.min(ts - last, 60);
+                    last = ts;
+                    if (!paused) {
+                        if (!step) next();
+                        el += dt;
+                        var p = Math.min(el / step.d, 1);
+                        if (step.th !== undefined) {
+                            var e = ease(p);
+                            st.th = from.th + (step.th - from.th) * e;
+                            st.r = from.r + (step.r - from.r) * e;
+                        }
+                        draw(st.th, st.r);
+                        if (p >= 1) next();
+                    }
+                    requestAnimationFrame(frame);
+                }
+                showWafers();
+                draw(st.th, st.r);
+                status.textContent = paused ? "停止中" : "待機中";
+                pp.textContent = paused ? "再生" : "一時停止";
+                pp.addEventListener("click", function () {
+                    paused = !paused;
+                    pp.textContent = paused ? "再生" : "一時停止";
+                    if (paused) status.textContent = "一時停止中";
+                    else if (step && step.m) status.textContent = step.m;
+                });
+                requestAnimationFrame(function (ts) {
+                    last = ts;
+                    requestAnimationFrame(frame);
+                });
+            })();
+        </script>
+    </body>
+</html>
